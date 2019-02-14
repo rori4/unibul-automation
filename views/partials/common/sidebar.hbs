@@ -3,7 +3,7 @@
         <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
             <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
                 <div class="d-table m-auto">
-                    <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 75px;" src="images/logo.png"
+                    <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 75px;" src="/images/logo.png"
                         alt="Shards Dashboard">
                     <span class="d-none d-md-inline ml-1">Automation</span>
                 </div>
@@ -25,10 +25,16 @@
     </form>
     <div class="nav-wrapper">
         <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link active" href="/books">
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="/books/add">
                     <i class="material-icons">book</i>
-                    <span>FREE Book Distribution</span>
+                    <span>Add Book</span>
+                </a>
+            </li>
+             <li class="nav-item dropdown">
+                <a class="nav-link" href="/books/list">
+                    <i class="material-icons">book</i>
+                    <span>Book List</span>
                 </a>
             </li>
             <li class="nav-item">

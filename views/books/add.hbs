@@ -1,0 +1,70 @@
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4 mb-3 border-bottom">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Free</span>
+            <h3 class="page-title">Amazon Book Submission</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 mb-4">
+            <div class="card card-small mb-6">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Book Information</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-0 px-3 pt-3">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <form action="/books/add" method="POST">
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Title" name="title"
+                                                id="title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="synopsis" id="synopsis"
+                                                rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <textarea class="form-control" name="authorBio" id="authorBio"
+                                                rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Book cover url..."
+                                                name="bookCover" id="bookCover">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Amazon url..."
+                                                name="amazonUrl" id="amazonUrl">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Email"
+                                                name="authorEmail" id="authorEmail">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 text-center">
+                                            <button type="submit" class="mb-2 btn btn-sm btn-white">Add Book</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
