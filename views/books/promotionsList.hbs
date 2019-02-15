@@ -12,7 +12,7 @@
         <div class="col">
             <div class="card card-small mb-4">
                 <div class="card-header border-bottom">
-                    <h6 class="m-0">Active Users</h6>
+                    <h6 class="m-0">Scheduled Promotions</h6>
                 </div>
                 <div class="card-body p-0 pb-3 text-center">
                     <table class="table mb-0">
@@ -21,30 +21,27 @@
                                 <th scope="col" class="border-0">#</th>
                                 <th scope="col" class="border-0">Title</th>
                                 <th scope="col" class="border-0">Amazon Link</th>
-                                <th scope="col" class="border-0">Author Email</th>
-                                <th scope="col" class="border-0">Statistics</th>
-                                <th scope="col" class="border-0">Actions</th>
+                                <th scope="col" class="border-0">Start Date</th>
+                                <th scope="col" class="border-0">End Date</th>
+                                <th scope="col" class="border-0">Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each books}}
+                            {{#each bookPromotions}}
                             <tr>
                                 <td>{{inc @key}}</td>
-                                <td>{{this.title}}</td>
-                                <td><a href="{{this.amazonUrl}}">Go To Amazon</a></td>
-                                <td>{{this.authorEmail}}</td>
+                                <td>{{this.book.title}}</td>
+                                <td><a href="{{this.book.amazonUrl}}">Go To Amazon</a></td>
+                                <td>{{formatDate this.dateFrom "short"}}</td>
+                                <td>{{formatDate this.dateTo "short"}}</td>
                                 <td>
-                                    <a href="/book/stat/{{this._id}}">
-                                        <i class="material-icons">insert_chart</i>
+                                    {{#ifEquals this.status "waiting"}}
+                                        <img src="/images/loading.gif" style="height: 30px" title="The promotion is being processed. Please check back later.">
+                                    {{else}}
+                                    <a href="/books/promotions/{{this._id}}">
+                                        <i class="material-icons">list</i>
                                     </a>
-                                </td>
-                                <td>
-                                    <a href="/book/{{this._id}}">
-                                        <i class="material-icons">create</i>
-                                    </a>
-                                    <a href="/book/stat/{{this._id}}">
-                                        <i class="material-icons">clear</i>
-                                    </a>
+                                    {{/ifEquals}}
                                 </td>
                             </tr>
                             {{/each}}
@@ -54,10 +51,9 @@
             </div>
         </div>
     </div>
-    {{#unless books}}
+    {{#unless bookPromotions}}
     <div class="row justify-content-center align-items-center">
-        <p>There are no books currently. Please <a href="/books/add">add some books to your
-                portfolio.</a></p>
+        <p>There are no promotions for this book. Please <a href="/books/promotions/add">add a promotion.</a></p>
     </div>
     {{/unless}}
     <!-- End Default Light Table -->

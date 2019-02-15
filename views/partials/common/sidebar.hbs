@@ -26,16 +26,17 @@
     <div class="nav-wrapper">
         <ul class="nav flex-column">
             <li class="nav-item dropdown">
-                <a class="nav-link" href="/books/add">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                    aria-expanded="true">
                     <i class="material-icons">book</i>
-                    <span>Add Book</span>
+                    <span>Amazon Promotion Suite</span>
                 </a>
-            </li>
-             <li class="nav-item dropdown">
-                <a class="nav-link" href="/books/list">
-                    <i class="material-icons">book</i>
-                    <span>Book List</span>
-                </a>
+                <div class="dropdown-menu dropdown-menu-small">
+                    <a class="dropdown-item" href="/books/add">Add Book</a>
+                    <a class="dropdown-item" href="/books/list">Book List</a>
+                    <a class="dropdown-item" href="/books/promotions/list">Book Promotions</a>
+                    <a class="dropdown-item" href="/books/promotions/add">Book Promotions Add</a>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link " href="/courses">

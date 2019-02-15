@@ -1,4 +1,5 @@
 const { Builder, By, Key, until, driver } = require("../../config/selenium");
+
 const errors = [];
 const results = [];
 const websites = {

@@ -6,4 +6,5 @@ const app = require('express')();
 require('./config/express')(app);
 require('./config/routes')(app);
 require('./config/passport')();
+require('./config/cron')();
 app.listen(config.port);

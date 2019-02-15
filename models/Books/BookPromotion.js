@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 
-const bookPromotion = new mongoose.Schema({
+const bookPromotionSchema = new mongoose.Schema({
     dateFrom: {type: mongoose.Schema.Types.Date, required:true},
     dateTo: {type: mongoose.Schema.Types.Date, required:true},
     book: {type: mongoose.Schema.Types.ObjectId, ref:'Book'},
+    status: {type: mongoose.Schema.Types.String, default:"processing"},
+    submission: [{type: mongoose.Schema.Types.ObjectId, ref:'BookSubmission'}]
 });
 
-const BookPromotion = mongoose.model('BookPromotion', bookPromotion);
+const BookPromotion = mongoose.model('BookPromotion', bookPromotionSchema);
 module.exports = BookPromotion;

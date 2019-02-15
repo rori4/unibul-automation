@@ -1,0 +1,54 @@
+<div class="main-content-container container-fluid px-4">
+    <!-- Page Header -->
+    <div class="page-header row no-gutters py-4 mb-3 border-bottom">
+        <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+            <span class="text-uppercase page-subtitle">Free</span>
+            <h3 class="page-title">Amazon Book Submission</h3>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row justify-content-center">
+        <div class="col-lg-6 mb-4">
+            <div class="card card-small mb-6">
+                <div class="card-header border-bottom">
+                    <h6 class="m-0">Book Information</h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-0 px-3 pt-3">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12">
+                                <form action="/books/promotions/add" method="POST">
+                                    <div class="form-group">
+                                        <strong class="text-muted d-block mb-2">Select Book</strong>
+                                        <div class="input-group mb-3">
+                                            <select class="form-control" name="book">
+                                                {{#each books}}
+                                                <option value="{{this._id}}">{{this.title}}</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <strong class="text-muted d-block mb-2">Promotion Start Date</strong>
+                                        <div class="input-group mb-3 input-daterange">
+                                            <input type="text" class="form-control from-date" placeholder="date from"
+                                                name="dateFrom" id="dateFrom">
+                                            <input type="text" class="form-control to-date" placeholder="date to"
+                                                name="dateTo" id="dateTo">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-12 text-center">
+                                            <button type="submit" class="mb-2 btn btn-sm btn-white">Add Promotion For
+                                                This Book</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
