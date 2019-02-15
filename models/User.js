@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     firstName: { type: mongoose.Schema.Types.String },
     lastName: { type: mongoose.Schema.Types.String },
     salt: { type: mongoose.Schema.Types.String, required: true },
-    profilePic: {type: mongoose.Schema.Types.String, default: 'images/avatars/defaultAvatar.png'},
+    profilePic: {type: mongoose.Schema.Types.String, default: '/images/avatars/defaultAvatar.png'},
     roles: [{ type: mongoose.Schema.Types.String }],
     books: [{type: mongoose.Schema.Types.ObjectId, ref:'Book'}]
 });

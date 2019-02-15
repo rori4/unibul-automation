@@ -9,6 +9,7 @@ module.exports = app => {
     app.engine('.hbs', handlebars({
         defaultLayout: 'main',
         layoutsDir: './views/layouts/',
+        helpers: require("../util/helpers"),
         partialsDir: './views/partials/',
         extname: '.hbs'
     }));

@@ -12,7 +12,7 @@ module.exports = config => {
     db.once('open', err => {
         if (err) throw err;
         User.seedAdminUser().then(() => {
-            console.log('Database ready');                
+            console.log('Database ready');
         }).catch((reason) => {
             console.log('Something went wrong');
             console.log(reason);
