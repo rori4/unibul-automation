@@ -22,9 +22,7 @@ const websites = {
       let screenshotBeforeSubmit = await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1())
       await driver.findElement(By.id("gform_submit_button_10")).click();
       let el = await driver.wait(until.elementLocated(By.className('gform_confirmation_message')));
-
-      let screenshotEnd =  await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1())
-      console.log("we are here");
+      let screenshotEnd =  await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1());
       return {
         website: ws,
         result: "Success!",
@@ -35,25 +33,39 @@ const websites = {
       return await handleError(error, ws);
     }
   },
-  prettyHot: async book => {
+  prettyHot: async promo => {
     const ws = "https://pretty-hot.com/submit-your-book/";
     try {
       await driver.get(ws);
-      let screenshotBeforeSubmit = await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1())
-      let screenshotEnd =  await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1())
+      await driver.findElement(By.name("input_1")).sendKeys(promo.book.title);
+      await driver.findElement(By.name("input_2")).sendKeys(promo.book.synopsis);
+      await driver.findElement(By.name("input_8")).sendKeys(promo.book.authorBio);
+      await driver.findElement(By.name("input_10")).sendKeys(promo.book.amazonUrl);
+      await driver.findElement(By.name("input_9")).sendKeys(promo.book.bookCover);
+      await driver.findElement(By.name("input_4")).sendKeys(promo.book.authorEmail);
+      await driver.findElement(By.name("input_17")).click();
+      await driver.findElement(By.name("input_17")).sendKeys("non"+Key.ENTER);
+      await driver.findElement(By.name("input_13")).sendKeys(promo.book.keywords);
+      let date = moment(promo.dateFrom).format("MM/DD/YYYY");
+      await driver.findElement(By.name("input_16")).sendKeys(date);
+      let screenshotBeforeSubmit = await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1());
+      await driver.findElement(By.id("gform_submit_button_4")).click();
+      let el = await driver.wait(until.elementLocated(By.className('gform_confirmation_message')));
+      let screenshotEnd =  await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1());
       return {
         website: ws,
         result: "Success!",
         screenshots: [screenshotBeforeSubmit,screenshotEnd],
         error: "N/A"
       };
-    } catch {
-      return await handleError(error, ws);
+    } catch (error) {
+    return await handleError(error, ws);
     }
   },
-  // feeDiscountedBooks: book => {
-  //   //https://freediscountedbooks.com/submit/
-  // },
+  freeDiscountedBooks: book => {
+    const ws = "https://freediscountedbooks.com/submit/";
+    console.log(ws);
+  },
   // digitalBookToday: book => {
   //   //https://digitalbooktoday.com/join-our-team/12-top-100-submit-your-free-book-to-be-included-on-this-list/
   //   console.log(
@@ -143,10 +155,11 @@ let checkAndSubmit = async function() {
       if (promotions.length > 0) {
         for (const promo of promotions) {
           for (const s in websites) {
+            if(s!=="freeDiscountedBooks") continue; // working on this right now
             let result = await websites[s](promo);
             if(result){
               result.bookPromotion = promo._id;
-              let submission = await BookSubmission.create(result);
+              // let submission = await BookSubmission.create(result);
               promo.submissions.push(submission);
               console.log(result);
             }

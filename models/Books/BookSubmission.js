@@ -11,3 +11,4 @@ const bookSubmissionSchema = new mongoose.Schema({
 
 const BookSubmission = mongoose.model("BookSubmission", bookSubmissionSchema);
 module.exports = BookSubmission;
+  
