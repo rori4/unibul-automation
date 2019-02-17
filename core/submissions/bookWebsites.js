@@ -171,7 +171,7 @@ let checkAndSubmit = async function() {
       resolve('success')
     } catch (error) {
       console.log(error);
-      resolve('error')
+      reject(error);
     }
   })
 };
