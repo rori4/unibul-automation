@@ -1,9 +1,21 @@
-const cron = require("node-cron");
-const BookPromotion = require("../models/Books/BookPromotion");
+const CronJob = require("cron").CronJob;
+const submissions = require("../core/submissions");
+let everyFiveSeconds;
+
+const submitKindleToWebsites = async () => {
+  everyFiveSeconds.stop();
+  // console.log("Started");
+  let result = await submissions.bookWebsites.checkAndSubmit();
+  everyFiveSeconds.start();
+  // console.log("Stoped");
+};
 
 module.exports = () => {
-  cron.schedule("*/5 * * * * *", async function() {
-    let promotionsProcessing = await BookPromotion.find({ status: "processing" });
-    console.log("Curret count: " + promotionsProcessing.length);
+  everyFiveSeconds = new CronJob({
+    cronTime: "*/5 * * * * *",
+    onTick: submitKindleToWebsites,
+    start: false,
+    timeZone: "America/Los_Angeles"
   });
+  everyFiveSeconds.start();
 };

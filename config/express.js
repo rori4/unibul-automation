@@ -13,7 +13,6 @@ module.exports = app => {
         partialsDir: './views/partials/',
         extname: '.hbs'
     }));
-
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(session({

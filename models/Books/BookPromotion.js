@@ -5,7 +5,7 @@ const bookPromotionSchema = new mongoose.Schema({
     dateTo: {type: mongoose.Schema.Types.Date, required:true},
     book: {type: mongoose.Schema.Types.ObjectId, ref:'Book'},
     status: {type: mongoose.Schema.Types.String, default:"processing"},
-    submission: [{type: mongoose.Schema.Types.ObjectId, ref:'BookSubmission'}]
+    submissions: [{type: mongoose.Schema.Types.ObjectId, ref:'BookSubmission'}]
 });
 
 const BookPromotion = mongoose.model('BookPromotion', bookPromotionSchema);

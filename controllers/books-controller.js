@@ -1,5 +1,9 @@
+const imageDownload = require("image-download");
+const saveToServer = require('../util/saveToServer');
 const Book = require("../models/Books/Book");
 const Promotion = require("../models/Books/BookPromotion");
+
+
 module.exports = {
   addGet: (req, res) => {
     res.render("books/bookAdd");
@@ -8,6 +12,10 @@ module.exports = {
     try {
       let book = req.body;
       let bookAdded = await Book.create(book);
+      let imageBuffer = await imageDownload(bookAdded.bookCover);
+      let path = saveToServer.fromURL(imageBuffer,"books", bookAdded._id)
+      bookAdded.bookCover = path;
+      await bookAdded.save();
       res.redirect("/books/list");
     } catch (error) {
       console.log(error);
@@ -24,8 +32,8 @@ module.exports = {
   listPost: (req, res) => {},
   promotionsAllListGet: async (req, res) => {
     try {
-      let bookPromotions = await Promotion.find().populate('book');
-      res.render('books/promotionsList', {bookPromotions});
+      let bookPromotions = await Promotion.find().populate("book");
+      res.render("books/promotionsList", { bookPromotions });
     } catch (error) {
       console.log(error);
     }

@@ -28,14 +28,14 @@
                         </thead>
                         <tbody>
                             {{#each bookPromotions}}
-                            <tr>
+                            <tr class="middle">
                                 <td>{{inc @key}}</td>
                                 <td>{{this.book.title}}</td>
                                 <td><a href="{{this.book.amazonUrl}}">Go To Amazon</a></td>
                                 <td>{{formatDate this.dateFrom "short"}}</td>
                                 <td>{{formatDate this.dateTo "short"}}</td>
                                 <td>
-                                    {{#ifEquals this.status "waiting"}}
+                                    {{#ifEquals this.status "processing"}}
                                         <img src="/images/loading.gif" style="height: 30px" title="The promotion is being processed. Please check back later.">
                                     {{else}}
                                     <a href="/books/promotions/{{this._id}}">
