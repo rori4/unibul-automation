@@ -5,7 +5,7 @@ let everyFiveSeconds;
 const submitKindleToWebsites = async () => {
   everyFiveSeconds.stop();
   // console.log("Started");
-  let result = await submissions.bookWebsites.checkAndSubmit();
+  // let result = await submissions.bookWebsites.checkAndSubmit();
   everyFiveSeconds.start();
   // console.log("Stoped");
 };

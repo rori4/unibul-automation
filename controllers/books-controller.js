@@ -1,19 +1,22 @@
 const imageDownload = require("image-download");
-const saveToServer = require('../util/saveToServer');
+const saveToServer = require("../util/saveToServer");
 const Book = require("../models/Books/Book");
 const Promotion = require("../models/Books/BookPromotion");
 
-
 module.exports = {
   addGet: (req, res) => {
-    res.render("books/bookAdd");
+    res.render("books/bookAdd", { active: { Amazon: true, bookAdd: true } });
   },
   addPost: async (req, res) => {
     try {
       let book = req.body;
       let bookAdded = await Book.create(book);
       let imageBuffer = await imageDownload(bookAdded.bookCover);
-      let path = await saveToServer.fromURL(imageBuffer,"books", bookAdded._id)
+      let path = await saveToServer.fromURL(
+        imageBuffer,
+        "books",
+        bookAdded._id
+      );
       bookAdded.bookCover = path;
       await bookAdded.save();
       res.redirect("/books/list");
@@ -24,7 +27,7 @@ module.exports = {
   listGet: async (req, res) => {
     try {
       let books = await Book.find();
-      res.render("books/bookList", { books });
+      res.render("books/bookList", { books, active: { Amazon: true, bookList: true } });
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +36,7 @@ module.exports = {
   promotionsAllListGet: async (req, res) => {
     try {
       let bookPromotions = await Promotion.find().populate("book");
-      res.render("books/promotionsList", { bookPromotions });
+      res.render("books/promotionsList", { bookPromotions , active: { Amazon: true, promotionsList: true } });
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +45,7 @@ module.exports = {
   promotionAddGet: async (req, res) => {
     try {
       let books = await Book.find();
-      res.render("books/promotionsAdd", { books });
+      res.render("books/promotionsAdd", { books , active: { Amazon: true, promotionAdd: true } });
     } catch (error) {
       console.log(error);
     }
