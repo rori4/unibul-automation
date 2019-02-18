@@ -1,26 +1,29 @@
 const fs = require("fs");
-var path = require("path");
-var appDir = path.dirname(require.main.filename);
+const path = require("path");
+const appDir = path.dirname(require.main.filename);
 const imageType = require("image-type");
-
+const mkdir = require('../util/mkdir');
 
 async function fromURL(imageBuffer, destination, id) {
-    const type = imageType(imageBuffer) == null ? 'jpg' : type.ext;
-    const pathToSave = `${appDir}\\static\\imageDatabase\\${destination}\\${id}.${type}`;
-  //   await fs.mkdir(pathToSave, { recursive: true }, err => {
-  //     if (err) throw err;
-  //   });
-    await fs.writeFile(pathToSave, imageBuffer, err => {
-      console.log(err ? err : "done!");
-    });
-    return pathToSave;
+    try {
+        let imgType = imageType(imageBuffer);
+        const type = imgType == null ? 'png' : imgType.ext;
+        let pathToSave = `${appDir}\\static\\imageDatabase\\${destination}\\`;
+        await mkdir.byPathSync(pathToSave);
+        pathToSave = pathToSave + `${id}.${type}`;
+        await fs.writeFileSync(pathToSave, imageBuffer);
+        return pathToSave;
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 async function fromBase64(imageBuffer, destination, id) {
     try {
-        const type = imageType(imageBuffer) == null ? 'png' : type.ext;
+        let imgType = imageType(imageBuffer);
+        const type = imgType == null ? 'png' : imgType.ext;
         let pathToSave = `${appDir}\\static\\imageDatabase\\${destination}\\`;
-        fs.mkdirSync(pathToSave, { recursive: true });
+        await mkdir.byPathSync(pathToSave);
         pathToSave = pathToSave + `${id}.${type}`;
         fs.writeFileSync(pathToSave, imageBuffer,'base64');
         return pathToSave;

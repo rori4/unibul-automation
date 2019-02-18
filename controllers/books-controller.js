@@ -13,7 +13,7 @@ module.exports = {
       let book = req.body;
       let bookAdded = await Book.create(book);
       let imageBuffer = await imageDownload(bookAdded.bookCover);
-      let path = saveToServer.fromURL(imageBuffer,"books", bookAdded._id)
+      let path = await saveToServer.fromURL(imageBuffer,"books", bookAdded._id)
       bookAdded.bookCover = path;
       await bookAdded.save();
       res.redirect("/books/list");
@@ -51,6 +51,8 @@ module.exports = {
     try {
       let promotion = req.body;
       let promotionAdded = await Promotion.create(promotion);
+      let book = await Book.findById(promotion.book);
+      book.promotions.push(promotionAdded);
       res.redirect("/books/promotions/list");
     } catch (error) {
       console.log(error);
