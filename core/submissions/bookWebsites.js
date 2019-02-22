@@ -509,6 +509,54 @@ const websites = {
     } catch (error) {
       return await handleError(error, ws);
     }
+  },
+  indieBookOfTheDay: async promo => {
+    const ws = "http://indiebookoftheday.com/authors/free-on-kindle-listing/";
+  },
+  freeBooksHub: async promo => {
+    const ws = "http://www.freebookshub.com/authors/";
+  },
+  itsWriteNow: async promo=> {
+    const ws = "https://itswritenow.com/free-book-submission/";
+  },
+  kindleBookPromos: async promo => {
+    const ws = "http://kindlebookpromos.luckycinda.com/?page_id=283";
+  },
+  freeBooksy: async promo => {
+    const ws = "https://www.freebooksy.com/editorial-submissions/";
+  },
+  bookPreviewClub: async promo => {
+    const ws = "https://bookpreviewclub.com/free-submission-form/";
+  },
+  bookCircle: async promo => {
+    const ws = "http://book-circle.com/submit-free-kindle-ebook-listing/"
+  },
+  contentmo: async promo => {
+    const ws = "https://contentmo.com/submit-your-free-ebook-promo";
+  },
+  readingDeals: async promo => {
+    const ws = "https://readingdeals.com/submit-ebook/free";
+  },
+  freeeBooksForMe: async promo => {
+    const ws = "http://freeebooksforme.com/authors-page/";
+  },
+  choosyBookWorm: async promo => {
+    const ws = "https://www.choosybookworm.com/free-ebook-promotion/";
+  },
+  freeBoostMrketing: async promo => {
+    const ws = "http://freeboostmarketing.com/contact-us/";
+  },
+  bookLoversHeaven: async promo => {
+    const ws = "http://bookloversheaven.com/author-information-form/";
+  },
+  eReaderLove: async promo => {
+    const ws = "http://www.ereaderlove.com/contact-us-submit-a-book/"
+  },
+  eReaderIQ: async promo => {
+    const ws = "https://www.ereaderiq.com/contact/";
+  },
+  zwoodleBooks: async promo => {
+    const ws = "http://zwoodlebooks.com/submissions/";
   }
 };
 
