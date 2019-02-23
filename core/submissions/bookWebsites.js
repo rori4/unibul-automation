@@ -30,7 +30,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);
+      return await handleError(error, ws, promo);
     }
   },
   prettyHot: async promo => {
@@ -59,7 +59,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-    return await handleError(error, ws);
+    return await handleError(error, ws, promo);
     }
   },
   discountBookMan: async promo => {
@@ -89,7 +89,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-    return await handleError(error, ws);
+    return await handleError(error, ws, promo);
     }
   },
   bookBongo: async promo => {
@@ -122,7 +122,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-    return await handleError(error, ws);
+    return await handleError(error, ws, promo);
     }
   },
   eReaderGirl: async promo => {
@@ -145,7 +145,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-    return await handleError(error, ws);
+    return await handleError(error, ws, promo);
     }
   },
   theKindleBookReview: async promo => {
@@ -185,7 +185,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-    return await handleError(error, ws);
+    return await handleError(error, ws, promo);
     }
   },
   eBooksHabit: async promo => {
@@ -213,7 +213,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   loveleyBookPromotons:async promo => {
@@ -247,7 +247,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   newFreeKindleBooks:async promo => {
@@ -277,7 +277,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   eBookLister: async promo => {
@@ -321,7 +321,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   bookBloggerList:async promo => {
@@ -353,7 +353,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   frugalFreebies:async promo => {
@@ -390,7 +390,7 @@ const websites = {
         error: "N/A"
       };
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   armadilloEBooks:async promo => {
@@ -411,7 +411,7 @@ const websites = {
     await driver.findElement(By.name('Field14')).sendKeys(promo.dateTo.year);
     await driver.findElement(By.name('Field8')).sendKeys(promo.book.synopsis);
     await driver.findElement(By.name('Field10')).sendKeys(promo.book.authorBio);
-    return await handleResult(ws,driver,promo, async ()=>{
+    return await handleResult(ws,promo, async ()=>{
       await driver.actions().sendKeys(Key.TAB).perform();
       await driver.actions().sendKeys(Key.TAB).perform();
       await driver.actions().sendKeys(Key.ENTER).perform();
@@ -419,7 +419,7 @@ const websites = {
       await driver.wait(until.elementLocated(By.className('status-publish')));
     })
   } catch (error) {
-    return await handleError(error, ws);      
+    return await handleError(error, ws, promo);      
   }
   },
   bookAngel:async promo => {
@@ -434,12 +434,12 @@ const websites = {
      await driver.findElement(By.xpath(`//select[@name='duration']/option[@value='${promo.daysCount}']`)).click();
      await driver.findElement(By.name('nonfiction')).click();
      await driver.findElement(By.xpath(`//select[@name='nonfiction']/option[@value='696']`)).click(); //TODO: THis is hardcoded
-     return await handleResult(ws,driver,promo, async ()=>{
+     return await handleResult(ws,promo, async ()=>{
         await driver.findElement(By.name('submit')).click();
         await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'successfully submitted')]")));
      })
     } catch (error) {
-      return await handleError(error, ws);      
+      return await handleError(error, ws, promo);      
     }
   },
   freeBooks: async promo => {
@@ -451,7 +451,7 @@ const websites = {
       await driver.executeScript(removeReadOnlyInputs);
       await driver.findElement(By.name('fromDate')).sendKeys(promo.dateFrom.ddmmyyyy);
       await driver.findElement(By.name('toDate')).sendKeys(promo.dateTo.ddmmyyyy);
-      return await handleResult(ws,driver,promo, async ()=>{
+      return await handleResult(ws,promo, async ()=>{
          await driver.findElement(By.id('submitbook')).click();
          await driver.wait(until.elementLocated(By.id("confirmbook")));
          await driver.sleep(2000);
@@ -459,7 +459,7 @@ const websites = {
          await driver.wait(until.elementLocated(By.id("success")));
       })
      } catch (error) {
-       return await handleError(error, ws);      
+       return await handleError(error, ws, promo);      
      }
   },
   kornerKonnection:async promo => {
@@ -483,12 +483,12 @@ const websites = {
       await driver.findElement(By.name('asin_uk')).sendKeys(promo.book.asin);
       await driver.findElement(By.xpath("//input[@type='radio' and @value='Free']")).click();
       await driver.findElement(By.name('email_address')).sendKeys(promo.book.authorEmail);
-      return await handleResult(ws,driver,promo, async ()=>{
+      return await handleResult(ws,promo, async ()=>{
         await driver.findElement(By.xpath("//input[@type='submit']")).click();
         await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'successfully submitted')]")));
       })
     } catch (error) {
-      return await handleError(error, ws);  
+      return await handleError(error, ws, promo);  
     }
    },
   jungleDealsAndSteals:async promo => {
@@ -502,16 +502,39 @@ const websites = {
       let msg = `Hello, my book \"${promo.book.title}\" is free from ${promo.dateFrom.mmddyyyy} to ${promo.dateFrom.mmddyyyy}. Please consider adding it to your deals :)`
       await driver.findElement(By.name('your-subject')).sendKeys(subject);
       await driver.findElement(By.name('your-message')).sendKeys(msg);
-      return await handleResult(ws,driver,promo, async ()=>{
+      return await handleResult(ws,promo, async ()=>{
         await driver.findElement(By.xpath("//input[@type='submit' and @value='Send']")).click();
         await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'has been sent')]")));
       });
     } catch (error) {
-      return await handleError(error, ws);
+      return await handleError(error, ws, promo);
     }
   },
   indieBookOfTheDay: async promo => {
     const ws = "http://indiebookoftheday.com/authors/free-on-kindle-listing/";
+    try {
+      await driver.get(ws);
+      await driver.findElement(By.xpath("//input[contains(@name, 'Name')]")).sendKeys(promo.book.authorName);
+      await driver.findElement(By.xpath("//input[contains(@name, 'Email')]")).sendKeys(promo.book.authorEmail);
+      await driver.findElement(By.xpath("//input[contains(@name, 'Title')]")).sendKeys(promo.book.title);
+      await driver.findElement(By.xpath("//input[contains(@name, 'ASIN')]")).sendKeys(promo.book.asin);
+      await driver.findElement(By.xpath("//input[contains(@name, 'Link')]")).sendKeys(promo.book.amazonUrl);
+      await driver.actions().sendKeys(Key.TAB).perform();
+      await driver.actions().sendKeys('non').perform();
+      await driver.findElement(By.id("date_input_6")).sendKeys(promo.dateFrom["mm-dd-yyyy"]);
+      await driver.findElement(By.xpath("//input[contains(@name, 'ASIN')]")).click();
+      await driver.findElement(By.id("date_input_7")).sendKeys(promo.dateTo["mm-dd-yyyy"]);
+      await driver.actions().sendKeys(Key.TAB).perform();
+      await driver.actions().sendKeys(Key.SPACE).perform();
+      return await handleResult(ws,promo, async ()=>{
+        // await driver.findElement(By.xpath("//button[@type='submit']")).click();
+        await driver.actions().sendKeys(Key.TAB).perform();
+        await driver.actions().sendKeys(Key.ENTER).perform();
+        await driver.wait(until.elementLocated(By.xpath("//strong[text()='Available Sponsorship Packages']")));
+      })      
+    } catch (error) {
+      return await handleError(error, ws, promo);
+    }
   },
   freeBooksHub: async promo => {
     const ws = "http://www.freebookshub.com/authors/";
@@ -560,15 +583,13 @@ const websites = {
   }
 };
 
-
-
 addAdditionalInfo = (promo) => {
   extractASIN(promo);
   formatDates(promo);
   return promo;
 }
 
-handleResult = async (ws, driver, promo, submitConfirmation) => {
+handleResult = async (ws, promo, submitConfirmation) => {
   let screenshotBeforeSubmit = await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1());
   await submitConfirmation();
   let screenshotEnd =  await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1());
@@ -599,6 +620,7 @@ function formatDates(promo) {
   promo.dateFrom.mmddyyyy = moment(promo.dateFrom).format("MM/DD/YYYY");
   promo.dateFrom.yyyymmdd = moment(promo.dateFrom).format("YYYY/MM/DD");
   promo.dateFrom.ddmmyyyy = moment(promo.dateFrom).format("DD/MM/YYYY");
+  promo.dateFrom["mm-dd-yyyy"] = moment(promo.dateFrom).format("MM-DD-YYYY");
   promo.dateFrom.day= moment(promo.dateFrom).format("DD");
   promo.dateFrom.month= moment(promo.dateFrom).format("MM");
   promo.dateFrom.year= moment(promo.dateFrom).format("YYYY");
@@ -606,14 +628,15 @@ function formatDates(promo) {
   promo.dateTo.mmddyyyy = moment(promo.dateTo).format("MM/DD/YYYY"); 
   promo.dateTo.yyyymmdd = moment(promo.dateTo).format("YYYY/MM/DD");  
   promo.dateTo.ddmmyyyy = moment(promo.dateTo).format("DD/MM/YYYY");
+  promo.dateTo["mm-dd-yyyy"] = moment(promo.dateTo).format("MM-DD-YYYY");
   promo.dateTo.day= moment(promo.dateTo).format("DD");
   promo.dateTo.month= moment(promo.dateTo).format("MM");
   promo.dateTo.year= moment(promo.dateTo).format("YYYY");
 }
 
-async function handleError(error, ws) {
+async function handleError(error, ws, promo) {
   console.log(error);
-  let screenshot = await driver.takeScreenshot();
+  let screenshot = await saveToServer.fromBase64(await driver.takeScreenshot(),`submissions\\${promo.book._id}\\${promo._id}`,uuidv1());  
   return {
     website: ws,
     result: "Failed!",
@@ -632,7 +655,7 @@ let checkAndSubmit = async function() {
         for (let promo of promotions) {
           promo = addAdditionalInfo(promo);
           for (const s in websites) {
-            if(s!=="jungleDealsAndSteals") continue; // working on this right now
+            if(s!=="indieBookOfTheDay") continue; // working on this right now
             let result = await websites[s](promo);
             if(result){
               result.bookPromotion = promo._id;
